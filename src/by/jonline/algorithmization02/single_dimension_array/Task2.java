@@ -1,4 +1,4 @@
-package by.jonline.algorithmization02.single_dimension_arrays;
+package by.jonline.algorithmization02.single_dimension_array;
 
 import java.util.Arrays;
 
