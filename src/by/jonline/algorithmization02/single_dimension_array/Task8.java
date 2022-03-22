@@ -23,26 +23,37 @@ public class Task8 {
 	public static int[] arrayWithoutMinElements(int[] array) {
 		int j; // counter variable
 		int min;
-		int countMin = 0; // count min elements to initialize new array
+		int countMin; // count min elements to initialize new array
 		int[] result;
 
+		// returning empty array for empty array input
 		if (array.length == 0) {
 			return new int[0];
 		}
 
+		// find value of minimum element
 		min = minA(array);
 
+		// count number of elements equal to min 
+		countMin = 0;
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] == min) {
 				countMin++;
 			}
 		}
+		
+		// check zero size new array
+		if(array.length - countMin == 0) {
+			return new int[0];
+		}
 
+		// initialize result array
 		result = new int[array.length - countMin];
 		j = 0;
 
+		// fill new array
 		for (int i = 0; i < array.length; i++) {
-			if (array[i] != min) {
+			if (array[i] > min) {
 				result[j] = array[i];
 				j++;
 			}
@@ -80,16 +91,20 @@ public class Task8 {
 		int[] arr1 = { 1, 1, 1, 2, 3 };
 		int[] arr2 = new int[0];
 		int[] arr3 = { -Integer.MAX_VALUE, 1, 2, Integer.MAX_VALUE };
+		int[] arr4 = { 1, 1, 1 };
 
 		// Test using arrays
 		System.out.println("Test 1. Expected output [2, 3]");
 		System.out.println(Arrays.toString(arrayWithoutMinElements(arr1)));
 
-		System.out.println("Test 2. Expected output []");
+		System.out.println("Test 2. Empty array. Expected output []");
 		System.out.println(Arrays.toString(arrayWithoutMinElements(arr2)));
 
-		System.out.println("Test 3. Expected output [1, 2, 2147483647]");
+		System.out.println("Test 3. Max integer. Expected output [1, 2, 2147483647]");
 		System.out.println(Arrays.toString(arrayWithoutMinElements(arr3)));
+		
+		System.out.println("Test 4. Equal elements. Expected output []");
+		System.out.println(Arrays.toString(arrayWithoutMinElements(arr4)));
 	}
 
 }
