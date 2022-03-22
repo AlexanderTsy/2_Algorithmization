@@ -63,7 +63,7 @@ public class Task7 {
 		
 		System.out.println("Result for arr1 = "+maxSumOfPair(arr1));
 		System.out.println("Result for arr2 = "+maxSumOfPair(arr2));
-		System.out.println("Result for arr2 = "+maxSumOfPair(arr3));
+		System.out.println("Result for arr3 = "+maxSumOfPair(arr3));
 	}
 
 }
