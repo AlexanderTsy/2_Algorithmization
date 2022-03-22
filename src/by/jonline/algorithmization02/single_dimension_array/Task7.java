@@ -22,6 +22,10 @@ public class Task7 {
 		int n;
 		double[] arrayOfSums;
 		
+		if (a.length == 0) {
+			System.err.println("Array contains no elements.");
+			return 0;
+		}
 		// check array length is even
 		if (a.length%2 == 1) {
 			System.err.println("Array length is odd, have to be even.");
@@ -54,9 +58,12 @@ public class Task7 {
 		//Test array 2
 		double[] arr2 = {0, 1, 2, 6, 1, 2, 1};
 		
+		//Test array 3
+		double[] arr3 = {};
+		
 		System.out.println("Result for arr1 = "+maxSumOfPair(arr1));
 		System.out.println("Result for arr2 = "+maxSumOfPair(arr2));
-
+		System.out.println("Result for arr2 = "+maxSumOfPair(arr3));
 	}
 
 }
