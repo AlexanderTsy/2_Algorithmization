@@ -2,16 +2,19 @@ package by.jonline.algorithmization02.single_dimension_array;
 
 import java.util.Arrays;
 
+/**
+ * 4. Algorithmization Одномерные массивы. Задание 4 Даны действительные числа
+ * a1, a2, ..., an. Поменять местами наибольший и наименьший элементы.
+ * 
+ * @author tsyhanok.aa
+ */
 public class Task4 {
-	/*
-	 * 4. Algorithmization Одномерные массивы. Задание 4 Даны действительные числа
-	 * a1, a2, ..., an. Поменять местами наибольший и наименьший элементы.
-	 */
 	
-	//зададим тестовый массив элементов a1, a2, ..., an
-	private static double[] a = {1.654, 132009.00, 9121580, 6547, 567, -119680, 0, 65480.564098};
-
-	public static void main(String[] args) {
+	/**
+	 * Method switches places of the biggest and the smallest elements of the array
+	 * @param  a  double[] array to change
+	 */
+	public static void changeMinMax(double[] a) {
 		//инициализируем минимальный и максимальный элементы
 		double min = a[0];
 		double max = a[0];
@@ -34,7 +37,22 @@ public class Task4 {
 		// поменяем минимальный и максимальный элементы местами
 		a[posAtMax]=min;
 		a[posAtMin]=max;
+	}
+	
 
+	public static void main(String[] args) {
+		
+		//зададим тестовый массив элементов a1, a2, ..., an
+		double[] a = {Double.MAX_VALUE, -Double.MAX_VALUE, 9121580, 6547, 567, -119680, 0, 65480.564098};
+		
+		System.out.println("Исходный массив");
+		//Выведем исходный массив
+		System.out.println(Arrays.toString(a));
+		
+		//Поменяем местами минимальный и максимальный элементы
+		changeMinMax(a);
+		
+		System.out.println("Измененный массив");
 		//Выведем измененный массив
 		System.out.println(Arrays.toString(a));
 	}
