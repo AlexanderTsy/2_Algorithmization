@@ -1,5 +1,7 @@
 package by.jonline.algorithmization02.multidimensional_array;
 
+import java.util.Objects;
+
 /**
  * 2 Algorithmization Массивы массивов. Задание 2.<br/>
  * Дана матрица. Вывести k-ю строку и p-й столбец матрицы.
@@ -15,10 +17,16 @@ public class Task3 {
 	 * @param k is 1-based index of row
 	 */
 	public static void printRow(int[][] array, int k) {
+		if (Objects.isNull(array)) {
+			System.err.println("Array is null. Nothing to output");
+			return;
+		}
+		
 		if (isEmptyArray(array)) {
 			System.err.println("Empty array. Nothing to output");
 			return;
 		}
+		
 		if (!isMatrix(array)) {
 			System.err.println("Array is not a matrix. Rows are not the same length.");
 			return;
@@ -41,10 +49,16 @@ public class Task3 {
 	 * @param p is 1-based index of column
 	 */
 	public static void printColumn(int[][] array, int p) {
+		if (Objects.isNull(array)) {
+			System.err.println("Array is null. Nothing to output");
+			return;
+		}
+		
 		if (isEmptyArray(array)) {
 			System.err.println("Empty array. Nothing to output");
 			return;
 		}
+		
 		if (!isMatrix(array)) {
 			System.err.println("Array is not a matrix. Rows are not the same length.");
 			return;
