@@ -2,6 +2,7 @@ package by.jonline.algorithmization02.multidimensional_array;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * 2 Algorithmization Массивы массивов. Задание 8<br/>
@@ -92,37 +93,54 @@ public class Task8 {
 		}
 	}
 
+	private static int getIndexFromConsole(String message) {
+		int i;
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+
+		do {
+			System.out.print(message);
+			while (!scanner.hasNextInt()) {
+				System.out.print(message);
+				scanner.next();
+			}
+			i = scanner.nextInt();
+		} while (i < 0);
+		return i;
+	}
+
 	public static void main(String[] args) {
+		int i;
+		int j;
 		
-		//Test array 1. Matrix
-		int[][] arr1= {
-				{1,0,2,0},
-				{1,0,2,0},	
-				{1,0,2,0}
-		};
-		//Test array 2. Not a matrix
-				int[][] arr2= {
-						{1,0,2},
-						{1,0,2,0},	
-						{1,0,2,0}
-				};
-		
+		// Test array 1. Matrix
+		int[][] arr1 = { { 1, 0, 2, 0 }, { 1, 0, 2, 0 }, { 1, 0, 2, 0 } };
+		// Test array 2. Not a matrix
+		int[][] arr2 = { { 1, 0, 2 }, { 1, 0, 2, 0 }, { 1, 0, 2, 0 } };
+
 		System.out.println("Test 1. Expected column 2s, column 0s, column 1s, column 0s");
 		changeColumns(0, 2, arr1);
 		printMatrix(arr1);
-		
+
 		System.out.println("Test 2. Expected Not a matrix error");
 		changeColumns(0, 2, arr2);
-		
+
 		System.out.println("Test 3. Expected Index out of bounds error");
 		changeColumns(0, 5, arr1);
-		
+
 		System.out.println("Test 4. Expected Negative index error");
 		changeColumns(0, -5, arr1);
-		
+
 		arr2 = null;
 		System.out.println("Test 5. Expected Null or empty array error");
 		changeColumns(0, 2, arr2);
+		
+		System.out.println("Test 6. User input");
+		System.out.println("Enter two indices to swap columns");
+		i = getIndexFromConsole("i < " + arr1[0].length + " >>");
+		j = getIndexFromConsole("j < " + arr1[0].length + " >>");
+		changeColumns(i, j, arr1);
+		printMatrix(arr1);
 	}
 
 }
