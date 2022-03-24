@@ -50,7 +50,7 @@ public class Task6 {
 		}
 		//mirror bottom half of the matrix
 		for (int row = 0; row < matrix.length/2; row++) {
-			matrix[n-1-row] = matrix[row];
+			matrix[n-1-row] = matrix[row].clone();
 		}
 
 		return matrix;
@@ -76,14 +76,18 @@ public class Task6 {
 	}
 
 	public static void main(String[] args) {
+		int[][] m;
+		
 		System.out.println("Test 1. n=4");
 		printMatrix(createMatrix(4));
 
 		System.out.println("Test 2. n=-10");
 		printMatrix(createMatrix(-10));
 		
-		System.out.println("Test 3. n=6");
-		printMatrix(createMatrix(6));
+		System.out.println("Test 3. n=6. Check cloning. Top left corner is 8, bottom left corner is 1");
+		m = createMatrix(6);
+		m[0][0] = 8;
+		printMatrix(m);
 		
 		System.out.println("Test 4. n=0");
 		printMatrix(createMatrix(0));
