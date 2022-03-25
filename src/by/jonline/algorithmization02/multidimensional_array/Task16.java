@@ -20,7 +20,7 @@ package by.jonline.algorithmization02.multidimensional_array;
 public class Task16 {
 	
 	public static int[][] makeMagicSquare() {
-		
+		return null;
 	}
 
 	public static void main(String[] args) {
