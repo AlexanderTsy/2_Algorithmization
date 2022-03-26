@@ -19,6 +19,7 @@ public class Task02 {
 		int[] result;
 		int aCount;
 		int bCount;
+	
 		
 		if( Objects.isNull(a) && Objects.isNull(b)) {
 			return null;
@@ -39,18 +40,57 @@ public class Task02 {
 			return null;
 		}
 		
+		
+		
 		result = new int[a.length+b.length];
+		// Since a and b are non-decreasing sequences
+		// if sequence a less than b
+		if ( a[a.length-1] <= b[0]) {
+			for (int i = 0; i < a.length; i++) {
+				result[i] = a[i];
+			}
+			for (int i = 0; i < b.length; i ++) {
+				result[a.length+i] = b[i];
+			}
+			return result;
+		}
+		// if sequence b less than a
+		if ( b[b.length-1] <= a[0]) {
+			for (int i = 0; i < b.length; i++) {
+				result[i] = b[i];
+			}
+			for (int i = 0; i < a.length; i ++) {
+				result[b.length+i] = a[i];
+			}
+			return result;
+		}
+		
 		aCount = 0;
 		bCount = 0;
+		
+		
 		// TODO malfunction at the end of arrays - fix.
 		for (int i = 0; i < result.length; i++) {
-			if(a[aCount] < b[bCount] && aCount < a.length) {
+			if(aCount >= a.length) {
+				result[i] = b[bCount];
+				bCount++;
+				continue;
+			}
+			if(bCount >= b.length) {
 				result[i] = a[aCount];
 				aCount++;
+				continue;
+			}
+			if(a[aCount] < b[bCount]) {
+				result[i] = a[aCount];
+				aCount++;
+				continue;
 			} else {
 				result[i] = b[bCount];
 				bCount++;
+				continue;
 			}
+
 		}
 		
 		return result;
