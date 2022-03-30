@@ -22,12 +22,12 @@ import java.util.Objects;
 public class Task05 {
 
 	/**
-	 * Method performs insertion sort. Each value is inserted into result array
+	 * Method performs binary insertion sort. Each value is inserted into result array
 	 * depending on its value. Insertion position is found using binary search.
 	 * @param array
 	 * @return sorted array
 	 */
-	public static int[] insertionSort(int[] array) {
+	public static int[] binaryInsertionSort(int[] array) {
 		if(Objects.isNull(array)) {
 			return null;
 		}
@@ -110,19 +110,19 @@ public class Task05 {
 
 		arr = new int[] { 15, 12, 1, 6, 60, 0, -15, 67, 100 };
 		System.out.println("Test 1 random values");
-		System.out.println(Arrays.toString(insertionSort(arr)));
+		System.out.println(Arrays.toString(binaryInsertionSort(arr)));
 
 		System.out.println("Test 2 Values ordered descending");
 		arr = new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-		System.out.println(Arrays.toString(insertionSort(arr)));
+		System.out.println(Arrays.toString(binaryInsertionSort(arr)));
 
 		System.out.println("Test 3 Empty array");
 		arr = new int[] {};
-		System.out.println(Arrays.toString(insertionSort(arr)));
+		System.out.println(Arrays.toString(binaryInsertionSort(arr)));
 
 		System.out.println("Test 4 Array is null");
 		arr = null;
-		System.out.println(Arrays.toString(insertionSort(arr)));
+		System.out.println(Arrays.toString(binaryInsertionSort(arr)));
 	}
 
 }
