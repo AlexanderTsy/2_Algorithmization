@@ -1,5 +1,6 @@
 package by.jonline.algorithmization02.array_sort;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
@@ -23,10 +24,10 @@ public class Task08 {
 	 * @param p array of numerators
 	 * @param q array of denominators
 	 */
-	public static long[][] bringToLowestCommonDenominatorAndOrderAscending (int[] p, int[]q) {
+	public static BigInteger[][] bringToLowestCommonDenominatorAndOrderAscending (int[] p, int[]q) {
 		int [] fraction;
-		long [] numerators;
-		long lowestCommonDenominator;
+		BigInteger [] numerators;
+		BigInteger lowestCommonDenominator;
 		//p array of numerators
 		//q array of denominators
 		if( Objects.isNull(p) || Objects.isNull(q) || p.length == 0 || q.length == 0 || p.length != q.length ) {
@@ -42,22 +43,26 @@ public class Task08 {
 			q[i] = fraction[1];
 		}
 		
-		numerators = new long[p.length];
+		//insertion sort of fractions
+		for (int i = 1; i < p.length; i++) {
+			int key = p[i];
+			int j = i-1;
+		
+			while (j >= 0 && p[j] < key) {	
+				p[j+1] = p[j];
+				j = j - 1;
+			}
+			p[j + 1] = key;
+		}
+		
+		//calculate numerators for lowest common denominator
+		numerators = new BigInteger[p.length];
 		lowestCommonDenominator = lowestCommonDenominator(q);
 		for (int i = 0; i < q.length; i++) {
-			numerators[i] = p[i] == 0 ? 0 : lowestCommonDenominator / p[i];
+			numerators[i] = p[i] == 0 ? BigInteger.ZERO : lowestCommonDenominator.divide(BigInteger.valueOf(p[i]));
 		}
 		
-		//Sort sequence of fractions
-		int i = 0;
-		
-		while (i < p.length) {
-			//insertion sort of fractions
-			
-			i++;
-		}
-		
-		long[][] result = {numerators, {lowestCommonDenominator}};
+		BigInteger[][] result = {numerators, {lowestCommonDenominator}};
 		return result;
 
 	}
@@ -78,14 +83,14 @@ public class Task08 {
 		return result;
 	}
 	
-	private static long lowestCommonDenominator(int[] q) {
-		int i = 1;
+	private static BigInteger lowestCommonDenominator(int[] q) {
+		BigInteger lowestCD = BigInteger.ONE;
 		for (int j = 0; j < q.length; j++) {
-			if (i%q[j] != 0) {
-				i *= q[j];
+			if (lowestCD.remainder(BigInteger.valueOf(q[j])).compareTo(BigInteger.valueOf(0)) != 0) {
+				lowestCD = lowestCD.multiply(BigInteger.valueOf(q[j]));
 			}
 		}
-		return i;
+		return lowestCD;
 	}
 	
 	/**
@@ -138,12 +143,12 @@ public class Task08 {
 		// Tests.
 		int[] p; //numerators
 		int[] q; //denominators
-		long[][] result;
-		int n = 10;
+		BigInteger[][] result;
+		int n = 100;
 		
 		System.out.println("Test 1 Two big random arrays");
-		p = getRandomIntArrayOfSize(n, 20);
-		q = getRandomIntArrayOfSize(n, 10);
+		p = getRandomIntArrayOfSize(n, 2000);
+		q = getRandomIntArrayOfSize(n, 700);
 		
 		for (int i = 0; i < p.length; i++) {
 			System.out.println(p[i]+"/"+q[i] + "=" + Arrays.toString(simplifyFraction(p[i], q[i])));
