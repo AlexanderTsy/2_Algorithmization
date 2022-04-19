@@ -1,7 +1,6 @@
 package by.jonline.algorithmization02.array_sort;
 
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
@@ -34,8 +33,7 @@ public class Task08 {
 			return null;
 		}
 		
-		//Find Lowest Common Denominator
-		
+		//Simplify fractions
 		for (int i = 0; i < q.length; i++) {
 			fraction = simplifyFraction(p[i], q[i]);
 			p[i] = fraction[0];
@@ -66,6 +64,12 @@ public class Task08 {
 
 	}
 	
+	/**
+	 * Method simplifies fraction
+	 * @param p numerator
+	 * @param q denominator
+	 * @return simplified fraction [numerator, denominator]
+	 */
 	private static int[] simplifyFraction(int p, int q) {
 		int[] result = new int[2];
 		
@@ -82,6 +86,11 @@ public class Task08 {
 		return result;
 	}
 	
+	/**
+	 * Method finds lowest common denominator
+	 * @param q array of denominators
+	 * @return lowest common denominator
+	 */
 	private static BigInteger lowestCommonDenominator(int[] q) {
 		BigInteger lowestCD = BigInteger.ONE;
 		for (int j = 0; j < q.length; j++) {
@@ -93,9 +102,9 @@ public class Task08 {
 	}
 	
 	/**
-	 * Generates array of random integers of size n within range &plusmn;n
+	 * Generates array of random integers of size n within range [0, maxNumber)
 	 * @param n
-	 * @param maxNumber TODO
+	 * @param maxNumber
 	 * @return array of random integers
 	 */
 	private static int[] getRandomIntArrayOfSize(int n, int maxNumber) {
@@ -118,14 +127,24 @@ public class Task08 {
 		p = getRandomIntArrayOfSize(n, 2000);
 		q = getRandomIntArrayOfSize(n, 700);
 		
-		for (int i = 0; i < p.length; i++) {
-			System.out.println(p[i]+"/"+q[i] + "=" + Arrays.toString(simplifyFraction(p[i], q[i])));
+		result = bringToLowestCommonDenominatorAndOrderAscending(p, q);
+		for (int i = 0; i < result[0].length; i++) {
+			System.out.println(result[0][i]+"/"+result[1][0]);
 		}
+		
+		System.out.println("Test 2 Three fractions");
+		p = new int[] {1, 3, 13};
+		q = new int[] {3, 5, 7};
 		
 		result = bringToLowestCommonDenominatorAndOrderAscending(p, q);
 		for (int i = 0; i < result[0].length; i++) {
 			System.out.println(result[0][i]+"/"+result[1][0]);
 		}
+		
+		System.out.println("Test 3 Null numerators");
+		p = null;
+		q = new int[] {3, 5, 7};
+		result = bringToLowestCommonDenominatorAndOrderAscending(p, q);
 	}
 
 }
