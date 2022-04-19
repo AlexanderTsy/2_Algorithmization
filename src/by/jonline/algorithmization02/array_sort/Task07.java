@@ -20,77 +20,51 @@ import java.util.Random;
 public class Task07 {
 
 	/**
-	 * Merges two ascending sequences into one ascending sequence
+	 * Finds places to insert elements of b into a so that
+	 * sequence remains ascending
 	 * @param a
 	 * @param b
-	 * @return resulting sequence
+	 * @return numbers of places to insert
 	 */
-	public static int[] mergeTwoSequences(int[] a, int[] b) {
+	public static int[] placesToInsertElements(int[] a, int[] b) {
 		int[] result;
-		int aNum; //counter for array a
-		int bNum; //counter for array b
+		int aNum;
+		int bNum;
 		
-		if(Objects.isNull(a) || a.length == 0) {
-			return b;
+		if(Objects.isNull(a)) {
+			System.err.println("Array a is null");
+			return null;
+		}
+		if(Objects.isNull(b)) {
+			System.err.println("Array b is null");
+			return null;
+		}
+		if(!checkSortedAscending(a)) {
+			System.err.println("Array a is not ascending");
+			return null;
+		}
+		if(!checkSortedAscending(b)) {
+			System.err.println("Array b is not ascending");
+			return null;
 		}
 		
-		if(Objects.isNull(b) || b.length == 0) {
-			return a;
-		}
-		
-		result = new int[a.length + b.length];
+		//
+		result = new int[b.length];
 		aNum = 0;
 		bNum = 0;
 		
-		while (aNum < a.length || bNum < b.length) {
-			//check sequence a is ascending
-			if (aNum < a.length && aNum > 1 && (a[aNum] < a[aNum - 1])) {
-				System.err.println("Sequence a is not ascending");
-				return null;
+		while (aNum < a.length) {
+			while (bNum < b.length && b[bNum] < a[aNum]) {
+				result[bNum] = aNum;
+				bNum++;
 			}
-			//check sequence b is ascending
-			if (bNum < b.length && bNum > 1 && (b[bNum] < b[bNum - 1])) {
-				System.err.println("Sequence b is not ascending");
-				return null;
-			}
-			
-			//if a fully placed to result, inserting b elements
-			if (aNum == a.length) {
-				result[aNum + bNum] = b[bNum++];
-				continue;
-			}
-			//if b fully placed to result, inserting a elements
-			if (bNum == b.length) {
-				result[aNum + bNum] = a[aNum++];
-				continue;
-			}
-			
-			if (a[aNum] < b[bNum]) {
-				result[aNum + bNum] = a[aNum++];
-				continue;
-			}
-			if (a[aNum] >= b[bNum]) {
-				result[aNum + bNum] = b[bNum++];
-				continue;
-			}
+			aNum++;
 		}
 		
 		return result;
 	}
 	
-	/**
-	 * Generates array of random integers of size n within range &plusmn;n
-	 * @param n
-	 * @return array of random integers
-	 */
-	private static int[] getRandomIntArrayOfSize(int n) {
-		int[] a = new int[n];
-		Random rnd = new Random();
-		for (int i = 0; i < a.length; i++) {
-			a[i] = rnd.nextInt(2*n) - n; 
-		}
-		return a;
-	}
+	
 	
 	/**
 	 * Method checks if array is sorted ascending 
@@ -114,44 +88,32 @@ public class Task07 {
 		// Tests.
 		int[] a;
 		int[] b;
-		int[] result;
 		
-		System.out.println("Test 1 Two big random arrays");
-		a = getRandomIntArrayOfSize(1000000);
-		b = getRandomIntArrayOfSize(1000000);
-		Arrays.sort(a);
-		Arrays.sort(b);
-		
-		long startTime = System.currentTimeMillis();
-		result = mergeTwoSequences(a, b);
-		long stopTime = System.currentTimeMillis();
-		long elapsedTime = stopTime - startTime;
-		
-		System.out.println("Merging two 1M integer[] :  " + elapsedTime + " ms");
-		System.out.println("Is array sorted ascending: "+checkSortedAscending(result));
-		System.out.println("Sum of initial array lengths is equal to resulting array length: " + ((a.length+b.length)==result.length));
-		
-		System.out.println("Test 2 Two arrays");
+		System.out.println("Test 1 Two arrays");
 		a = new int[] { 1, 12, 24, 36, 65, 80, 100, 200, 300 };
 		b = new int[] { 5, 13, 17, 20, 68, 80, 120, 201, 299 };
-		result = mergeTwoSequences(a, b);
-		System.out.println("Is array sorted ascending: "+checkSortedAscending(result));
-		System.out.println(Arrays.toString(result));
-		System.out.println("Sum of initial array lengths is equal to resulting array length: " + ((a.length+b.length)==result.length));
+		System.out.println(Arrays.toString(placesToInsertElements(a, b)));
 		
-		System.out.println("Test 3 Null + array");
+		System.out.println("Test 2 Null + array");
 		a = null;
 		b = new int[] { 5, 13, 17, 20, 68, 80, 120, 201, 299 };
-		result = mergeTwoSequences(a, b);
-		System.out.println("Is array sorted ascending: "+checkSortedAscending(result));
-		System.out.println(Arrays.toString(result));
+		System.out.println(Arrays.toString(placesToInsertElements(a, b)));
 		
-		System.out.println("Test 4 Two unsorted arrays");
+		System.out.println("Test 3 Two unsorted arrays");
 		a = new int[] { 100, 200, 300, 1, 12, 24, 36, 65, 80 };
 		b = new int[] { 5, 13, 17, 20, 68, 80, 120, 201, 299 };
-		result = mergeTwoSequences(a, b);
-		System.out.println("Is array sorted ascending: "+checkSortedAscending(result));
-		System.out.println(Arrays.toString(result));
+		System.out.println(Arrays.toString(placesToInsertElements(a, b)));
+		
+		System.out.println("Test 4 Zero length array a");
+		a = new int[] {  };
+		b = new int[] { 5, 13, 17, 20, 68, 80, 120, 201, 299 };
+		System.out.println(Arrays.toString(placesToInsertElements(a, b)));
+		
+		System.out.println("Test 5 Zero length array b");
+		a = new int[] { 1, 12, 24, 36, 65, 80, 100, 200, 300 };
+		b = new int[] {  };
+		System.out.println(Arrays.toString(placesToInsertElements(a, b)));
+		
 	}
 
 	
