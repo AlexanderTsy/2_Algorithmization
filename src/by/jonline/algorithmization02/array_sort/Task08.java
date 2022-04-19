@@ -28,8 +28,7 @@ public class Task08 {
 		int [] fraction;
 		BigInteger [] numerators;
 		BigInteger lowestCommonDenominator;
-		//p array of numerators
-		//q array of denominators
+		
 		if( Objects.isNull(p) || Objects.isNull(q) || p.length == 0 || q.length == 0 || p.length != q.length ) {
 			System.err.println("Arrays are either null, or not equal length. Check input arrays.");
 			return null;
@@ -106,37 +105,6 @@ public class Task08 {
 			a[i] = rnd.nextInt(maxNumber)+1; 
 		}
 		return a;
-	}
-	
-	private static boolean checkSortedAscending (int[] p, int[] q) {
-		if( Objects.isNull(p) || Objects.isNull(q) || p.length == 0 || q.length == 0 || p.length != q.length ) {
-			System.err.println("Arrays are either null, or not equal length. Check input arrays.");
-			return false;
-		}
-		
-		for (int i = 0; i < p.length-1; i++) {
-			if ((double) p[i+1]/q[i+1]<(double) p[i]/q[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	/**
-	 * Method checks if passed integer n is prime number.
-	 * @param n positive integer
-	 * @return true if {@code n} is prime number,<br/> false if {@code n} is not prime
-	 */
-	private static boolean isPrime(int n) {
-		if (n < 2) {
-			return false;
-		}
-		for (int i = 2; i <= n / 2; i++) {
-			if (n % i == 0) {
-				return false;
-			}
-		}
-		return true;
 	}
 	
 	public static void main(String[] args) {
