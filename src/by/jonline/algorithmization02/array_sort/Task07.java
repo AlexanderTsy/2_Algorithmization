@@ -2,7 +2,6 @@ package by.jonline.algorithmization02.array_sort;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * 2 Algorithmization Одномерные массивы. Сортировки. Задание 7<br/>
