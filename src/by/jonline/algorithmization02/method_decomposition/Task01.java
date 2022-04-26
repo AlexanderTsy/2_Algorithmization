@@ -10,78 +10,84 @@ package by.jonline.algorithmization02.method_decomposition;
  *
  */
 public class Task01 {
-	
-	//Least common multiple
+
+	// Least common multiple
 	/**
 	 * Method calculates least common multiple of integers a and b
-	 * @param a
-	 * @param b
-	 * @return least common multiple or 0 if a and/or b equals 0
+	 * 
+	 * @param a > 0
+	 * @param b > 0
+	 * @return least common multiple or 0 if either a or b are less than or equal to
+	 *         0
 	 */
-	public static long leastCommonMultiple(int a, int b) {
-		if (a == 0 || b == 0) {
+	public static int leastCommonMultiple(int a, int b) {
+		if (a <= 0 || b <= 0) {
 			return 0;
 		}
-		
-		return a*b/greatestCommonDivisor(a, b);
+
+		return a * b / greatestCommonDivisor(a, b);
 	}
-	
-	//Lowest common denominator
+
+	// Lowest common denominator
 	/**
 	 * Method calculates greatest common divisor of integers a and b
-	 * @param a
-	 * @param b
-	 * @return
+	 * using Euclid's algorithm
+	 * 
+	 * @param a > 0
+	 * @param b > 0
+	 * @return greatest common divisor or 0 if either a or b are less than or equal
+	 *         to 0
 	 */
-	public static long greatestCommonDivisor(int a, int b) {
-		int i = 2;
-		int result = 1;
-		
-		if (a == 0 || b == 0) {
+	public static int greatestCommonDivisor(int a, int b) {
+		int tmp;
+		if (a < 0 || b < 0) {
+			System.out.println("Numbers have to be positive integer.");
 			return 0;
 		}
 		
-		while (i< a/2 || i< b/2) {
-			if (a % i == 0 && b % i == 0) {
-				a = a/i;
-				b = b/i;
-				result *= i;
-			} else {
-				i++;
-			}
+		//First number have to be greater than second
+		if (a < b) {
+			tmp = a;
+			a = b;
+			b = tmp;
 		}
-		return result;
+
+		if (b == 0) {
+			return a;
+		}
+		
+		return greatestCommonDivisor(b, a % b);
 	}
-	
+
 	public static void main(String[] args) {
 		int a;
 		int b;
-		
+
 		a = 9;
 		b = 27;
 		System.out.println(String.format("Test 1. For %d and %d", a, b));
-		System.out.println("GCD="+greatestCommonDivisor(a, b));
-		System.out.println("LCM="+leastCommonMultiple(a, b));
-		
-		a = 45;
-		b = 180;
-		
+		System.out.println("GCD=" + greatestCommonDivisor(a, b));
+		System.out.println("LCM=" + leastCommonMultiple(a, b));
+
+		a = 180;
+		b = 45;
+
 		System.out.println(String.format("Test 2. For %d and %d", a, b));
-		System.out.println("GCD="+greatestCommonDivisor(a, b));
-		System.out.println("LCM="+leastCommonMultiple(a, b));
-		
+		System.out.println("GCD=" + greatestCommonDivisor(a, b));
+		System.out.println("LCM=" + leastCommonMultiple(a, b));
+
 		a = 0;
 		b = 180;
-		
+
 		System.out.println(String.format("Test 3. For %d and %d", a, b));
-		System.out.println("GCD="+greatestCommonDivisor(a, b));
-		System.out.println("LCM="+leastCommonMultiple(a, b));
-		
-		a = 13;
-		b = 7;
-		
-		System.out.println(String.format("Test 3. For %d and %d", a, b));
-		System.out.println("GCD="+greatestCommonDivisor(a, b));
-		System.out.println("LCM="+leastCommonMultiple(a, b));
+		System.out.println("GCD=" + greatestCommonDivisor(a, b));
+		System.out.println("LCM=" + leastCommonMultiple(a, b));
+
+		a = -10;
+		b = -10;
+
+		System.out.println(String.format("Test 4. For %d and %d", a, b));
+		System.out.println("GCD=" + greatestCommonDivisor(a, b));
+		System.out.println("LCM=" + leastCommonMultiple(a, b));
 	}
 }
