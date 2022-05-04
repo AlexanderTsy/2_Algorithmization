@@ -1,6 +1,5 @@
 package by.jonline.algorithmization02.method_decomposition;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 /**
