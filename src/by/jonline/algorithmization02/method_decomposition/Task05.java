@@ -15,21 +15,6 @@ import java.util.Objects;
 public class Task05 {
 	public static void printSecondLargestNumber(int[] a) {
 
-		if (Objects.isNull(a)) {
-			System.out.println("Array is null. Nothing to print.");
-			return;
-		}
-
-		if (a.length == 0) {
-			System.out.println("Array has no elements. Nothing to print.");
-			return;
-		}
-
-		if (a.length == 1) {
-			System.out.println("Array has only one element. Can't find second largest element.");
-			return;
-		}
-
 		Integer secondLargest = secondLargestNumber(a);
 
 		if (!Objects.isNull(secondLargest)) {
@@ -37,11 +22,34 @@ public class Task05 {
 		}
 	}
 
+	/**
+	 * Method finds second largest number in array
+	 * @param a
+	 * @return second largest number or null
+	 */
 	private static Integer secondLargestNumber(int[] a) {
-		int max = Integer.MIN_VALUE;
-		int secondMax = Integer.MIN_VALUE;
+		int max;
+		int secondMax;
 
-		for (int i = 0; i < a.length; i++) {
+		if (Objects.isNull(a)) {
+			System.out.println("Array is null. Nothing to print.");
+			return null;
+		}
+
+		if (a.length == 0) {
+			System.out.println("Array has no elements. Nothing to print.");
+			return null;
+		}
+
+		if (a.length == 1) {
+			System.out.println("Array has only one element. Can't find second largest element.");
+			return null;
+		}
+		
+		max = a[0];
+		secondMax = a[0];
+		
+		for (int i = 1; i < a.length; i++) {
 			if (a[i] > max) {
 				secondMax = max;
 				max = a[i];
@@ -52,7 +60,7 @@ public class Task05 {
 		}
 
 		if (max == secondMax) {
-			System.out.println("No different numbers. Can't find second largest number.");
+			System.out.println("Numbers are equal. Can't find second largest number.");
 			return null;
 		}
 
@@ -85,7 +93,7 @@ public class Task05 {
 		System.out.println("Test 5. Array has one element.");
 		printSecondLargestNumber(arr);
 		
-		arr = new int[] { 1, 1 };
+		arr = new int[] { 1, 1, 1 };
 		System.out.println("Test 6. Array has equal elements.");
 		printSecondLargestNumber(arr);
 	}
